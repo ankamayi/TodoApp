@@ -1,6 +1,10 @@
 import React from "react";
 
-const Todo = () => {
+type TodoProps = {
+  todo: TodoType;
+}
+
+const Todo = ({todo}: TodoProps) => {
     return <div>    <li className="py-4">
       <div className="flex items-center justify-between">
         <div className="flex items-center">
@@ -13,7 +17,7 @@ const Todo = () => {
                   border-gray-300 rounded"
           />
           <label className="ml-3 block text-gray-900">
-            <span className="text-lg font-medium mr-2"> 散歩 </span>
+            <span className="text-lg font-medium mr-2">{todo.title} </span>
           </label>
         </div>
         <div className="flex items-center space-x-2">
