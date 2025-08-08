@@ -46,4 +46,17 @@ app.put("/editTodo/:id", async (req: Request, res: Response) => {
         return res.status(500).json({ error: "Failed to create todo"});
     }
 });
+
+app.delete("/deleteTodo/:id", async (req: Request, res: Response) => {
+    try {
+        const id = Number(req.params.id);
+        const deleteTodo = await prisma.todo.delete({
+            where: { id },
+         });
+         //成功した場合は、作成されたTODOをJSON形式で返す
+        return res.json(deleteTodo);
+    } catch (e) {
+        return res.status(500).json({ error: "Failed to create todo"});
+    }
+});
 app.listen(PORT,() => console.log("server is running🚀"));
