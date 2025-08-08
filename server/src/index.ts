@@ -29,4 +29,21 @@ app.post("/createTodo", async (req: Request, res: Response) => {
     }
 });
 
+app.put("/editTodo/:id", async (req: Request, res: Response) => {
+    try {
+        const id = Number(req.params.id);
+        const { title, isCompleted } = req.body;
+        const editTodo = await prisma.todo.update({
+            where: { id },
+            data: {
+                title: title,
+                isCompleted: isCompleted,
+            },
+         });
+         //成功した場合は、作成されたTODOをJSON形式で返す
+        return res.json(editTodo);
+    } catch (e) {
+        return res.status(500).json({ error: "Failed to create todo"});
+    }
+});
 app.listen(PORT,() => console.log("server is running🚀"));
